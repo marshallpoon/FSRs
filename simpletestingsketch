@@ -1,0 +1,31 @@
+/* FSR simple testing sketch.
+ 
+Connect one end of FSR to power, the other end to Analog 0.
+Then connect one end of a 10K resistor from Analog 0 to ground
+ 
+For more information see www.ladyada.net/learn/sensors/fsr.html */intfsrPin = 0;     // the FSR and 10K pulldown are connected to a0intfsrReading;     
+  // the analog reading from the FSR resistor dividervoidsetup(void) {
+  // We'll send debugging information via the Serial monitorSerial.begin(9600);  
+}
+ 
+voidloop(void) {
+  fsrReading = analogRead(fsrPin); 
+ 
+  Serial.print("Analog reading = ");
+  Serial.print(fsrReading);     // the raw analog reading// We'll have a few threshholds, qualitatively determinedif(fsrReading < 10) {
+    Serial.println(" - No pressure");
+  } elseif(fsrReading < 200) {
+    Serial.println(" - Light touch");
+  } elseif(fsrReading < 500) {
+    Serial.println(" - Light squeeze");
+  } elseif(fsrReading < 800) {
+    Serial.println(" - Medium squeeze");
+  } else{
+    Serial.println(" - Big squeeze");
+  }
+  delay(1000);
+}
+
+
+
+From <https://learn.adafruit.com/force-sensitive-resistor-fsr/using-an-fsr>
